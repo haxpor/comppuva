@@ -10,7 +10,14 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <pair>
+#include <utility>
+
+#define OPT_DECLR(varname)              static unsigned int gProfile##varname = 0;
+#define OPT_COUNT(varname)              ++gProfile##varname;
+#define OPT_PRINT(varname, title)       std::cout << "Operation count (" << title << "): " << gProfile##varname << std::endl;
+
+// define global profiling variables
+OPT_DECLR(InsertionSort)
 
 template <typename T>
 static void PrintVector(const std::vector<T>& v)
@@ -29,21 +36,25 @@ static void PrintVector(const std::vector<T>& v)
  * \param colorMark2 std::pair of index, and color integer value for second location
  */
 template <typename T>
-static void PrintVectorColorized(const std::vector<T>& v, const std::pair&& colorMark1, const std::pair&& colorMark2)
+static void PrintVectorColorized(const std::vector<T>& v, const std::pair<int, int>&& colorMark1, const std::pair<int, int>&& colorMark2)
 {
     for (int i=0; i<v.size(); ++i)
     {
         if (i != v.size()-1)
         {
-            if (first == i || second == i)
-                std::cout << "\033[1;31m" << v[i] << "\033[0m ";
+            if (colorMark1.first == i)
+                std::cout << "\033[1;" << colorMark1.second << "m" << v[i] << "\033[0m ";
+            else if (colorMark2.first == i)
+                std::cout << "\033[1;" << colorMark2.second << "m" << v[i] << "\033[0m ";
             else
                 std::cout << v[i] << " ";
         }
         else
         {
-            if (first == i || second == i)
-                std::cout << "\033[1;31m" << v[i] << "\033[0m " << std::endl;
+            if (colorMark1.first == i)
+                std::cout << "\033[1;" << colorMark1.second << "m" << v[i] << "\033[0m " << std::endl;
+            else if (colorMark2.first == i)
+                std::cout << "\033[1;" << colorMark2.second << "m" << v[i] << "\033[0m " << std::endl;
             else
                 std::cout << v[i] << std::endl;
         }
@@ -61,9 +72,10 @@ static void InsertionSort(std::vector<T>& v)
         // operate from right to left until all elements to the left are processed
         while ((j > 0) && (v[j] < v[j-1]))
         {
+            PrintVectorColorized(v, std::make_pair(j, 31), std::make_pair(j-1, 32));
             std::swap(v[j], v[j-1]);
-            PrintVectorColorized(v, j, j-1);
             --j;
+            OPT_COUNT(InsertionSort)
         }
     }
 };
@@ -86,5 +98,6 @@ int main()
     std::cout << std::endl;
 
     InsertionSort(elems);
+    OPT_PRINT(InsertionSort, "Operation count")
     return 0;
 }
