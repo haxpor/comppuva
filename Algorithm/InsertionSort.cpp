@@ -3,6 +3,9 @@
  * Complextity: O(N ^ 2)
  * Input: A single line of uppercase character separated by a space.
  * Output: A single line of sorted array each as uppercase character separated by a space.
+ *
+ * To avoid printing result/steps and total operations used for insertion sort algorithm, compile
+ * program with -DDISABLE_PROFILE.
  */
 
 #include <iostream>
@@ -72,10 +75,14 @@ static void InsertionSort(std::vector<T>& v)
         // operate from right to left until all elements to the left are processed
         while ((j > 0) && (v[j] < v[j-1]))
         {
+#ifndef DISABLE_PROFILE
             PrintVectorColorized(v, std::make_pair(j, 31), std::make_pair(j-1, 32));
+#endif
             std::swap(v[j], v[j-1]);
             --j;
+#ifndef DISABLE_PROFILE
             OPT_COUNT(InsertionSort)
+#endif
         }
     }
 };
@@ -98,6 +105,10 @@ int main()
     std::cout << std::endl;
 
     InsertionSort(elems);
+#ifndef DISABLE_PROFILE
     OPT_PRINT(InsertionSort, "Operation count")
+#else
+    PrintVector(elems);
+#endif
     return 0;
 }
