@@ -13,7 +13,7 @@ using namespace std;
 
 #define PRINTARRAY(v) for(const int& e: v) cout << e << " "; cout << endl;
 
-static int partition(vector<int>& v, int low, int high)
+static int Partition(vector<int>& v, int low, int high)
 {
     // select last element as pivot
     int pivot = v[high];
@@ -31,13 +31,13 @@ static int partition(vector<int>& v, int low, int high)
     return i;
 }
 
-static void quicksort(vector<int>& v, int l, int r)
+static void Quicksort(vector<int>& v, int l, int r)
 {
     if (l < r)
     {
-        int q = partition(v, l, r);
-        quicksort(v, l, q-1);
-        quicksort(v, q+1, r);
+        int q = Partition(v, l, r);
+        Quicksort(v, l, q-1);
+        Quicksort(v, q+1, r);
     }
 }
 
@@ -46,7 +46,7 @@ int main()
     vector<int> v ({9, 7, 5, 11, 12, 2, 14, 3, 10, 6});
     PRINTARRAY(v)
 
-    quicksort(v, 0, v.size()-1);
+    Quicksort(v, 0, v.size()-1);
     PRINTARRAY(v)
     
     return 0;
