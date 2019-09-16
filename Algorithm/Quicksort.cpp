@@ -4,14 +4,14 @@
  * Quicksort is inplace sorting algorithm which is based on divide-and-conquer approach.
  * Interesting note is that quicksort is used as part of std::sort (which applies 3 sorting algorithms
  * together which are quicksort, heapsort and insertion sort) 's sorting algorithm namely introsort.
+ *
+ * Use testcases input from testcases/Quicksort.txt, or testcases/50Numbers.txt.
  */
 
-#include <iostream>
+#include "Util.h"
 #include <vector>
 
 using namespace std;
-
-#define PRINTARRAY(v) for(const int& e: v) cout << e << " "; cout << endl;
 
 static int Partition(vector<int>& v, int low, int high)
 {
@@ -43,11 +43,19 @@ static void Quicksort(vector<int>& v, int l, int r)
 
 int main()
 {
-    vector<int> v ({9, 7, 5, 11, 12, 2, 14, 3, 10, 6});
+    PROFILE_DECLR
+
+    vector<int> v;
+    int tmpN;
+    while (cin >> tmpN)
+        v.push_back(tmpN);
     PRINTARRAY(v)
 
+    PROFILE_START
     Quicksort(v, 0, v.size()-1);
+    PROFILE_END
     PRINTARRAY(v)
+    PROFILE_PRINT
     
     return 0;
 }

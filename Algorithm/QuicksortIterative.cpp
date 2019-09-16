@@ -1,20 +1,21 @@
 /**
  * Implementation of Quicksort in bottom-up approach via iterative (loop).
- * It's more optimized version of recursive version of quicksort as can be found at Algorithm/Quicksort.cpp.
+ * It's more optimized (as tested not about performance but stack space) version of
+ * recursive version of quicksort as can be found at Algorithm/Quicksort.cpp.
  *
  * The implementation involves using std::stack to save the splitted (partitioned) of location-indexes.
  *
  * It still uses the same partition() function as seen in Algorithm/Quicksort.cpp
+ *
+ * Use testcases input from testcases/Quicksort.txt, or testcases/50Numbers.txt.
  */
 
-#include <iostream>
+#include "Util.h"
 #include <stack>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
-
-#define PRINTARRAY(v) for(const int& e: v) cout << e << " "; cout << endl;
 
 static int partition(vector<int>& v, int low, int high)
 {
@@ -66,11 +67,19 @@ static void QuicksortIterative(vector<int>& v, int l, int r)
 
 int main()
 {
-    vector<int> v ({9, 7, 5, 11, 12, 2, 14, 3, 10, 6});
+    PROFILE_DECLR
+    vector<int> v; 
+    int tmpN;
+    while (cin >> tmpN)
+        v.push_back(tmpN);
+
     PRINTARRAY(v)
 
+    PROFILE_START
     QuicksortIterative(v, 0, v.size()-1);
+    PROFILE_END
     PRINTARRAY(v)
+    PROFILE_PRINT
 
     return 0;
 }
