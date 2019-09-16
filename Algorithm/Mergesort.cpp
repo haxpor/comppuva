@@ -14,7 +14,7 @@
 
 using namespace std;
 
-#define PRINTARRAY(v, T) for (int i=0,size=v.size(); i<size; ++i) { \
+#define PRINTARRAY(v) for (int i=0,size=v.size(); i<size; ++i) { \
                             if (i < size-1) cout << v[i] << " "; else cout << v[i];} cout << endl;
 
 /**
@@ -74,10 +74,10 @@ static void mergesort(vector<T>& v, int start, int end)
 int main()
 {
     vector<char> v ({'A', 'S', 'O', 'R', 'T', 'I', 'N', 'G', 'E', 'X', 'A', 'M', 'P', 'L', 'E'});
-    PRINTARRAY(v, char);
+    PRINTARRAY(v);
 
     mergesort(v, 0, v.size()-1);
-    PRINTARRAY(v, char);
+    PRINTARRAY(v);
 
     return 0;
 }
