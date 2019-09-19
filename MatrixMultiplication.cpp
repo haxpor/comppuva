@@ -1,5 +1,5 @@
 /**
- * Matrix multiplication program.
+ * Matrix multiplication program (1D dynamic array implementation).
  * Input:
  *  M N separated by a space wheres M is number of elements in rows, and N is for column for first matrix.
  *  Then the following subsequent lines followed by element integer value row by row from left
@@ -12,7 +12,8 @@
  *  Output matrix element by element starting from row by row, left to right for column.
  *  Separate each element from column to another column by space, and each row by a new line.
  *
- * Use testcases/MatrixMultiplication1.txt and testcases/MatrixMultiplication2.txt as input.
+ * Use testcases/MatrixMultiplication1.txt, testcases/MatrixMultiplication2.txt, and
+ * testcases/MatrixMultiplication3.txt as input.
  */
 #include <iostream>
 
