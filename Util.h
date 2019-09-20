@@ -17,6 +17,6 @@
 // print all elements value inside container
 // separated by a space, at the end it also prints newline
 #define PRINTARRAY(v) for (int i=0,size=v.size(); i<size; ++i) { \
-                            if (i < size-1) cout << v[i] << " "; else cout << v[i];} cout << endl;
+                            if (i < size-1) std::cout << v[i] << " "; else std::cout << v[i];} std::cout << std::endl;
 
 #endif /* UTIL_H_ */
