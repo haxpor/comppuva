@@ -1,5 +1,6 @@
 /**
  * Implementation of simple Priority Queue.
+ *
  * This version provides constant time in accessing largest element, and insertion,
  * but logarithmic time in extraction.
  */
