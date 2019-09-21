@@ -32,6 +32,12 @@ public:
 
     // extraction
     // if call Pop() when it's empty, then it's undefined behavior.
+    // actually it depends whether we want to return the root node in Pop() operation, or just have
+    // another Top() to only peek the largest value without doing any pop.
+    //
+    // Template method added here just for convenient in printing as custom data type i.e. char
+    // externally. It doesn't need, or better added template to the whole class to deal with custom
+    // underlying data type.
     template <typename T>
     T Pop()
     {
@@ -41,6 +47,13 @@ public:
         std::swap(arr[0], arr[n-1]);
         --n;
         DownHeap(0);
+        return arr[0];
+    }
+
+    // it will be undefined behavior if calling this function when it's empty.
+    template <typename T>
+    T Top() const
+    {
         return arr[0];
     }
 
@@ -154,6 +167,8 @@ int main()
 
     std::cout << "Pop and get: " << pq.Pop<char>() << std::endl;
     pq.PrintElements<char>();
+
+    std::cout << "Top: " << pq.Top<char>() << std::endl;
 
     return 0;
 }
