@@ -18,7 +18,6 @@ static void SelectionSort(std::vector<int>& v)
     if (v.size() < 1)
         return;
 
-    int ti = 0;
     for (int i=0; i<v.size()-1; ++i)
     {
         int smallest = v[i];
