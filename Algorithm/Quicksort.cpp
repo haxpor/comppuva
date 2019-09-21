@@ -13,6 +13,9 @@
 
 using namespace std;
 
+/**
+ * This partiion version is not original scheme proposed by Hoare, but it's proposed by Nico Lomuto.
+ */
 static int Partition(vector<int>& v, int low, int high)
 {
     // select last element as pivot
