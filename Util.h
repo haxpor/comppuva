@@ -19,4 +19,8 @@
 #define PRINTARRAY(v) for (int i=0,size=v.size(); i<size; ++i) { \
                             if (i < size-1) std::cout << v[i] << " "; else std::cout << v[i];} std::cout << std::endl;
 
+// print all elements value inside raw array
+#define PRINTSARRAY(v, size) for (int i=0; i<size; ++i) { \
+                            if (i < size-1) std::cout << v[i] << " "; else std::cout << v[i];} std::cout<< std::endl;
+
 #endif /* UTIL_H_ */
