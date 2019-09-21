@@ -44,10 +44,10 @@ public:
         if (n == 1)
             return arr[--n];
 
-        std::swap(arr[0], arr[n-1]);
-        --n;
+        T ret = arr[0];
+        std::swap(arr[0], arr[(n--)-1]);
         DownHeap(0);
-        return arr[0];
+        return ret;
     }
 
     // it will be undefined behavior if calling this function when it's empty.
@@ -74,7 +74,7 @@ public:
     {
         for (int i=0; i<n; ++i)
         {
-            std::cout << C(arr[i]) << " ";
+            std::cout << static_cast<C>(arr[i]) << " ";
         }
         std::cout << std::endl;
     }
@@ -92,7 +92,7 @@ private:
 
         int comparei = kk;
         int parenti = std::floor((kk+1)/2) - 1;
-        while (arr[parenti] < arr[comparei])
+        while (arr[parenti] < arr[comparei] && parenti >= 0)
         {
             std::swap(arr[parenti], arr[comparei]);
             comparei = parenti;
@@ -103,7 +103,7 @@ private:
     // k is index
     void DownHeap(int k)
     {
-        if (n == 1)
+        if (n == 0)
             return;
 
         int parenti = k;
@@ -111,9 +111,14 @@ private:
         int righti = 2*k + 2;
         while (parenti < n && lefti < n)
         {
-            if (righti < n && (arr[parenti] < arr[lefti] || arr[parenti] < arr[righti]))
+            int leftcVal = arr[lefti];
+            int rightcVal = arr[righti];
+            int parentVal = arr[parenti];
+
+            // left and right
+            if (lefti < n && righti < n && (parentVal < leftcVal || parentVal < rightcVal))
             {
-                if (arr[lefti] < arr[righti])
+                if (leftcVal <= rightcVal)
                 {
                     std::swap(arr[parenti], arr[righti]);
                     parenti = righti;
@@ -124,7 +129,8 @@ private:
                     parenti = lefti;
                 }
             }
-            else if (arr[parenti] < arr[lefti])
+            // only left
+            else if (lefti < n && righti >= n && parentVal < leftcVal)
             {
                 std::swap(arr[parenti], arr[lefti]);
                 parenti = lefti;
@@ -138,8 +144,9 @@ private:
             lefti = 2*parenti + 1;
             righti = 2*parenti + 2;
         }
+        PrintElements<int>();
     }
-};
+}
 
 int main()
 {
