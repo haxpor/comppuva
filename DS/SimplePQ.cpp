@@ -16,7 +16,7 @@ public:
     }
     ~PQ()
     {
-        delete arr;
+        delete[] arr;
         arr = nullptr;
     }
     
@@ -27,6 +27,7 @@ public:
     }
 
     // extraction
+    // if call Pop() when it's empty, then undefined behavior.
     int Pop()
     {
         int maxi = 0;
