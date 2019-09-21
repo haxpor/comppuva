@@ -30,6 +30,9 @@ public:
     // if call Pop() when it's empty, then undefined behavior.
     int Pop()
     {
+        if (n == 1)
+            return arr[--n];
+
         int maxi = 0;
         for (int i=1; i<n; ++i)
         {
