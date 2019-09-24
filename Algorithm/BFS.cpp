@@ -107,7 +107,8 @@ int main()
     PrintLevelOrder(root);
     std::cout << std::endl;
 
-    for (int i=1; i<=3; ++i)
+    int height = Height(root);
+    for (int i=1; i<=height; ++i)
     {
         std::cout << "level " << i << ": ";
         PrintAtLevel(root, i);
