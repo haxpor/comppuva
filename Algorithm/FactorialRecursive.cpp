@@ -4,7 +4,9 @@
 
 #include <iostream>
 
-static int Factorial(int n)
+typedef long long int FactInt;
+
+static FactInt Factorial(int n)
 {
     if (n == 0 || n == 1)
         return 1;
@@ -16,7 +18,9 @@ int main()
 {
     std::cout << Factorial(0) << std::endl;
     std::cout << Factorial(5) << std::endl;
-    std::cout << Factorial(10) << std::endl;
+    std::cout << Factorial(12) << std::endl;
+    std::cout << Factorial(7) << std::endl;
+    std::cout << Factorial(8) << std::endl;
 
     return 0;
 }
