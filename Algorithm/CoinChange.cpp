@@ -45,8 +45,8 @@ static int coinCount_recur(int coins[], int m, int n)
         return 0;
 
     // more explanation for this line as follows
-    // left side of + => count of solution included coins[m-1]
-    // right side of + => count of solution excluded coins[m-1]
+    // left side of + => count of solution excluded coins[m-1]
+    // right side of + => count of solution included coins[m-1]
     //  we continue working on the recursive call (notice m is still the same, but target value deducted from previous iteration)
     return coinCount_recur(coins, m-1, n) + coinCount_recur(coins, m, n-coins[m-1]);
 }
