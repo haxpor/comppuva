@@ -9,6 +9,7 @@
  *  - Reverse InOrder
  *
  *  The binary tree is as follows
+ *      1 is root
  *      1->left = 2
  *      1->right = 3
  *      2->left = 4
