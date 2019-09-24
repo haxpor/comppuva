@@ -14,32 +14,33 @@ FactInt memo[1000];
 
 static FactInt Factorial(int n)
 {
-    // set the end point
-    if (memo[0] != -1)
-        memo[0] = 1;
-
-    // find the location onwards on where to do addition calculation
-    int k = n;
-    for (; k>=0; --k)
+    // checking from cache should be prioritized
+    if (memo[n] != -1)
+        return memo[n];
+    else if (n == 0)
     {
-        if (memo[k] != -1)
+        memo[0] = 1;
+        return 1;
+    }
+    else
+    {
+        // find the location onwards on where to do addition calculation
+        int k = n-1;
+        for (; k>=0; --k)
         {
-            // cache hit
-            if (k == n)
-                return memo[k];
-            else
+            if (memo[k] != -1)
             {
                 k = k + 1;
                 break;
             }
         }
+
+        // work bottom-up
+        for (int i=k; i<=n; ++i)
+            memo[i] = i * memo[i-1];
+
+        return memo[n];
     }
-
-    // work bottom-up
-    for (int i=k; i<=n; ++i)
-        memo[i] = i * memo[i-1];
-
-    return memo[n];
 }
 
 int main()

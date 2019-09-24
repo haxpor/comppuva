@@ -21,10 +21,13 @@ FactInt memo[1000];
 // undefined behavior is called of negative number
 static FactInt Factorial(int n)
 {
-    if (n == 0)
-        return 1;
-    else if (memo[n] != -1)
+    if (memo[n] != -1)
         return memo[n];
+    else if (n == 0)
+    {
+        memo[0] = 1;
+        return 1;
+    }
     else
     {
         FactInt r = n * Factorial(n - 1);
