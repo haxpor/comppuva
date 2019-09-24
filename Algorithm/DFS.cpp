@@ -1,5 +1,5 @@
 /**
- * Implementation of various type of Depth-First-Search.
+ * Implementation of various type of Depth-First-Search (DFS) for binary tree.
  * Include
  *  - PreOrder
  *  - PostOrder
