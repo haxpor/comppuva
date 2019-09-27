@@ -4,6 +4,11 @@
  * Basically it is built on top of Priority Queue with underlying Heap Data Structure to allow
  * contant time in getting access to the largest element (root node), O(nlogn) time complexity for
  * insertion and extraction.
+ *
+ * For convenient in implementing Heap Sort algorithm in this source file, we make use of DS/PQ.cpp
+ * thus making function calls. For performance-wise, we might consider eliminating function call,
+ * and directly incorporate code into as well as allow HearSort() function to directly access to
+ * backing store of heap data structure.
  */
 
 #include "Util.h"
