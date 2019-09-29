@@ -10,7 +10,8 @@
 
 using namespace std;
 
-#define MAX_STUDENT 8
+#define MAX_TEAM 8
+#define MAX_STUDENT (2 * MAX_TEAM)
 
 /* Forming Quiz Teams, the solution for UVa 10911 above */
 // using global variables is a bad software engineering practices.
@@ -26,14 +27,14 @@ double matching(int bitmask)            // DP state = bitmask
     // we initialize 'memo' with -1 in the main function
     // this state has been computed before
     // simply lookup the memo table
-    if (memo[bitmask] > -0.5)
+    if (memo[bitmask] -(-1.0) >= std::numeric_limits<double>::epsilon())
         return memo[bitmask];
     // all students are already matched
     // the cost is 0
     if (bitmask == target)
         return memo[bitmask] = 0;
 
-    // initialize with a large value
+    // initialize with a arbitrary large value
     double ans = 2000000000.0;
 
     int p1, p2;
@@ -45,7 +46,8 @@ double matching(int bitmask)            // DP state = bitmask
             ans = min(ans, dist[p1][p2] + matching(bitmask | (1 << p1) | (1 << p2)));   // pick the minimum
                                                                                         // bitmask | (1 << p1) | 1 << p2) is the location of bit-string to locate
 
-    return memo[bitmask] = ans;                 // store result in a memo table and return
+    memo[bitmask] = ans;                 // store result in a memo table and return
+    return ans;
 }
 
 int main()
@@ -68,7 +70,7 @@ int main()
 
         // use DP to solve min weighted perfect matching on small general graph
         // see bipartite minimum cost perfect matching
-        for (i=0; i<(1<<16); ++i)
+        for (i=0; i < (1 << MAX_STUDENT); ++i)
             memo[i] = -1.0;                     // set -1 to all cells
         // the last bit position is the integer represent the whole bit string - 1
         // or think in index-based
