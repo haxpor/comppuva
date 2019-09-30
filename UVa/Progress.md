@@ -2103,7 +2103,7 @@ Progress of UVa solutions
 * [ ] [10338](https://uva.onlinejudge.org/external/103/10338.pdf)
 * [ ] [10339](https://uva.onlinejudge.org/external/103/10339.pdf)
 * [ ] [10340](https://uva.onlinejudge.org/external/103/10340.pdf)
-* [ ] [10341](https://uva.onlinejudge.org/external/103/10341.pdf)
+* [x] [10341](https://uva.onlinejudge.org/external/103/10341.pdf)
 * [ ] [10342](https://uva.onlinejudge.org/external/103/10342.pdf)
 * [ ] [10343](https://uva.onlinejudge.org/external/103/10343.pdf)
 * [ ] [10344](https://uva.onlinejudge.org/external/103/10344.pdf)
