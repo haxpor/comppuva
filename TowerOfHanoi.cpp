@@ -20,13 +20,9 @@
  */
 static void towerHanoiMove(int n, char from, char to, char aux)
 {
-    // if it's just left with 1 disk, then we can directly move it to destinatino rod
-    if (n == 1)
-    {
-        std::cout << "move disk 1 from " << from << " to " << to << std::endl;
-    }
-    // otherwise recursively move disks
-    else
+    // typical implementation will have n == 1 check, the following might seem weird
+    // but for us to have only one place in printing out
+    if (n > 0)
     {
         // the whole procedure can be described as a big picture of 3 steps as follows
         // move n-1 disks from 'A' to 'B'
