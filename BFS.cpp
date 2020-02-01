@@ -26,6 +26,7 @@ struct Node
 };
 
 // 1. Stack-based version
+// This will print elements' value starting from input `root`.
 static void PrintLevelOrder(const Node* root)
 {
     if (root == nullptr) return;
@@ -49,6 +50,7 @@ static void PrintLevelOrder(const Node* root)
 }
 
 // 2. Print level version
+// This will print elements' value starting from input `root`.
 static void PrintAtLevel(const Node* root, int level)
 {
     if (root == nullptr)
