@@ -1,4 +1,4 @@
-CFLAGS=-O2
+CFLAGS=-O2 -g
 
 all:
 	g++ $(CFLAGS) naive.cpp -o naive.out
