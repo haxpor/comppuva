@@ -20,7 +20,7 @@
 
 int main()
 {
-    std::ifstream infile("testcase.txt");
+    std::ifstream infile("testcases.txt");
     std::string line;
 
     int N;
