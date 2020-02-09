@@ -4,10 +4,10 @@
  * Format of testcase.txt is as follows
  *
  * Number of testcases
- * Testcase#1 Input numbers separated by white space
- * Testcase#1 Target number
- * Testcase#1 Expect number
- * Testcase#2 ... and so on
+ * TC#1 Input numbers separated by white space
+ * TC#1 Target number
+ * TC#1 Expect number
+ * TC#2 ... and so on
  */
 #include <vector>
 #include <cassert>
