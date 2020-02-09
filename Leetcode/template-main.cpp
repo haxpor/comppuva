@@ -25,12 +25,13 @@ int main()
 
     int N;
     infile >> N;    // read number of testcases
+    infile.ignore();
 
     Solution sol;
 
     for (int i=0; i<N; ++i)
     {
-        std::getline(infile.ignore(), line); // need to ignore left-out byte (newline) from previously extraction operator
+        std::getline(infile, line); // need to ignore left-out byte (newline) from previously extraction operator
                                              // otherwise, we will read newline instead
         std::istringstream lineStream(line);
         std::vector<int> inputs;
