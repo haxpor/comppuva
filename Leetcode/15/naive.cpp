@@ -47,7 +47,7 @@ public:
             for (int j=i+1; j<size; ++j)
             {
                 int remaining = -nums[i] - nums[j];
-                auto foundRange = lookup.equal_range(remaining);
+                auto foundRange = lookup.equal_range(remaining);        // later I realized this doesn't help, it still costs O(N) for number of elements with that key
                 for (auto it=foundRange.first; it!=foundRange.second; ++it)
                 {
                     int k = it->second;
