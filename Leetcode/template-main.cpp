@@ -1,5 +1,4 @@
-/**
- * Problem 
+/** * Problem 
  *
  * Format of testcase.txt is as follows
  *
@@ -32,8 +31,7 @@ int main()
 
     for (int i=0; i<N; ++i)
     {
-        std::getline(infile, line); // need to ignore left-out byte (newline) from previously extraction operator
-                                             // otherwise, we will read newline instead
+        std::getline(infile, line);
         std::istringstream lineStream(line);
         std::vector<int> inputs;
 
