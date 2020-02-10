@@ -5,9 +5,11 @@
  *
  * Number of testcases
  * TC#1 Input numbers separated by white space
- * TC#1 Target number
  * TC#1 Expect number
  * TC#2 ... and so on
+ *
+ * Time complexity: <to-be-filled>
+ * Space complexity: <to-be-filled>
  */
 #include <vector>
 #include <cassert>
