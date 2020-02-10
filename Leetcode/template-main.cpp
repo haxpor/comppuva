@@ -16,7 +16,6 @@
 #include <fstream>
 #include <iostream>
 #include <cstdio>
-#include <cstdlib>
 
 int main()
 {
@@ -51,15 +50,14 @@ int main()
         infile >> expect;
 
         // compute
-        int search = sol.search(inputs, num);
-        if (search == expect)
+        int out = sol.search(inputs, num);
+        if (out == expect)
         {
-            std::printf("[Success #%d] Output = %d, Expect = %d\n", i, search, expect);
+            std::printf("[Success #%d] Output = %d, Expect = %d\n", i, out, expect);
         }
         else
         {
-            std::printf("[Failed #%d] Output = %d, Expect = %d\n", i, search, expect);
-            std::exit(1);
+            std::printf("[Failed #%d] Output = %d, Expect = %d\n", i, out, expect);
         }
     }
 
