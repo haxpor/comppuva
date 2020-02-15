@@ -1,4 +1,4 @@
-CFLAGS=-g -O2 -std=c++14
+CFLAGS=-g -O2 -Wall -Wextra -pedantic -std=c++14
 LDFLAGS=-lm
 
 all:
