@@ -36,9 +36,8 @@ int main()
         std::istringstream lineStream(line);
         std::vector<int> inputs;
 
-        int num;
-
         // get list of input numbers
+        int num;
         while (lineStream >> num)
         {
             inputs.push_back(num);
