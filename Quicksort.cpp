@@ -10,6 +10,7 @@
 
 #include "Util.h"
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -44,6 +45,41 @@ static void Quicksort(vector<int>& v, int l, int r)
     }
 }
 
+/*
+ * This partition is based on Hoare's approach.
+ * It's more efficient than Lomuto's with reduced 3x number of compare/swap, and different chosen of pivot.
+ */
+static int PartitionHoare(vector<int>& v, int low, int high)
+{
+    int pivot = v[std::floor((low + high) / 2)];
+    int i = low - 1;
+    int j = high + 1;
+    while (true)
+    {
+        do {
+            ++i;
+        } while (v[i] < pivot);
+
+        do {
+            --j;
+        } while (v[j] > pivot);
+
+        if (i >= j)
+            return j;
+        std::swap(v[i], v[j]);
+    }
+}
+
+static void QuicksortHoare(vector<int>& v, int l, int r)
+{
+    if (l < r)
+    {
+        int p = PartitionHoare(v, l, r);
+        QuicksortHoare(v, l, p);
+        QuicksortHoare(v, p+1, r);
+    }
+}
+
 int main()
 {
     PROFILE_DECLR
@@ -56,6 +92,12 @@ int main()
 
     PROFILE_START
     Quicksort(v, 0, v.size()-1);
+    PROFILE_END
+    PRINTARRAY(v)
+    PROFILE_PRINT
+
+    PROFILE_START
+    QuicksortHoare(v, 0, v.size()-1);
     PROFILE_END
     PRINTARRAY(v)
     PROFILE_PRINT
