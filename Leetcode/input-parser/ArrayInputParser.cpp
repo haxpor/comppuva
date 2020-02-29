@@ -31,7 +31,7 @@ std::vector<int> ArrayInputParser::parse(const std::string& str) const {
 
     // validate correctness
     if (st.size() != 0)
-        throw std::runtime_error("stack size should be 0");
+        throw std::runtime_error("stack size should be 0. Input string is '" + str + "'");
 
     return resVector;
 }
@@ -76,7 +76,7 @@ std::vector<std::vector<int>> ArrayInputParser::parse2(const std::string& str) c
 
     // validate correctness
     if (st.size() != 0)
-        throw std::runtime_error("stack size should be 0");
+        throw std::runtime_error("stack size should be 0. Input string is '" + str + "'");
 
     return resVector;
     
