@@ -142,34 +142,32 @@ private:
 };
 
 // suitable for printing neighbors of each node
+// optimized: to use iterative, no recursive
 class TraversalBFS {
 public:
     void traversePrint(const Node* node) {
-        std::set<int> visited;
-        traversePrint_(node, visited);
-    }
-private:
-    void traversePrint_(const Node* node, std::set<int>& visited) {
         if (node == nullptr)
             return;
 
-        std::cout << "(" << node->val << ") ";
-        visited.insert(node->val);
-
-        std::queue<Node*> sameLevelNodes;
-
-        for (auto it=node->neighbors.begin(); it!=node->neighbors.end(); ++it) {
-            sameLevelNodes.push(*it);
-            std::cout << (*it)->val << " ";
-        } 
+        std::unordered_map<int, const Node*> visited;
+        std::queue<const Node*> sameLevelNodes;
+        sameLevelNodes.push(node);
 
         while (!sameLevelNodes.empty()) {
-            Node* node = sameLevelNodes.front();
+            const Node* node = sameLevelNodes.front();
             sameLevelNodes.pop();
 
             const auto searchIt = visited.find(node->val);
-            if (searchIt == visited.end())
-                traversePrint_(node, visited);
+            if (searchIt != visited.end())
+                continue;
+            else
+                visited.insert(std::make_pair(node->val, node));
+
+            std::cout << '(' << node->val << ") ";
+            for (auto it=node->neighbors.begin(); it!=node->neighbors.end(); ++it) {
+                sameLevelNodes.push(*it);
+                std::cout << (*it)->val << " ";
+            }
         }
     }
 };
