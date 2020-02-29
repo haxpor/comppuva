@@ -18,6 +18,7 @@
 #include <fstream>
 #include <iostream>
 #include <cstdio>
+#include "ArrayInputParser.h"
 
 int main()
 {
@@ -29,6 +30,7 @@ int main()
     infile.ignore();
 
     Solution sol;
+    ArrayInputParser aparser;
 
     for (int i=0; i<N; ++i)
     {
