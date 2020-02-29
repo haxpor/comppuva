@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <stack>
 #include <tuple>
+#include <unordered_set>
 
 // Definition for a Node.
 class Node {
@@ -58,14 +59,45 @@ public:
         if (node == nullptr)
             return nullptr;
 
+        std::unordered_set<int> visited;
         std::unordered_map<int, Node*> lookup;
-        cloneGraph_(node, lookup);
-        return lookup[1];       // should be at least 1 node which always starts with 1
-    }
-private:
-    void cloneGraph_(Node* node, std::unordered_map<int, Node*>& lookup) {
-        if (node == nullptr)
-            return;
+        std::queue<const Node*> processingNodes;
+
+        processingNodes.push(node);
+
+        while (!processingNodes.empty()) {
+            const Node* toCloneNode = processingNodes.front();
+            processingNodes.pop();
+
+            if (visited.count(toCloneNode->val) == 0) {
+                auto memoIt = lookup.find(toCloneNode->val);
+                Node* clonedParentNode;
+                if (memoIt == lookup.end()) {
+                    clonedParentNode = new Node(toCloneNode->val);
+                    lookup.insert(std::make_pair(clonedParentNode->val, clonedParentNode));
+                }
+                else
+                    clonedParentNode = memoIt->second;
+
+                visited.insert(clonedParentNode->val);
+
+                for (auto it=toCloneNode->neighbors.begin(); it!=toCloneNode->neighbors.end(); ++it) {
+                    processingNodes.push(*it);
+
+                    auto memoChildIt = lookup.find((*it)->val);
+                    if (memoChildIt == lookup.end()) {
+                        Node* clonedNode = new Node((*it)->val);
+                        lookup.insert(std::make_pair(clonedNode->val, clonedNode));
+                        clonedParentNode->neighbors.push_back(clonedNode);
+                    }
+                    else {
+                        clonedParentNode->neighbors.push_back(memoChildIt->second);
+                    }
+                }
+            }
+        }
+
+        return lookup[1];
     }
 };
 
@@ -125,6 +157,9 @@ public:
         return nodesCollected;
     }
     void deleteAll(Node* node) {
+        if (node == nullptr)
+            return;
+
         std::vector<Node*> nodes = traverseGet(node);
         for (int i=0; i<nodes.size(); ++i) {
             delete nodes[i];
@@ -197,35 +232,43 @@ public:
 class Checker {
 public:
     // return true if both chain of nodes in a is equal to b
-    bool checkEqual(Node* a, Node* b) {
-        std::set<int> checked;
-        return checkEqual_(a, b, checked);
-    }
-private:
-    bool checkEqual_(Node* a, Node* b, std::set<int>& checked) {
-        if (a == nullptr || b != nullptr)
-            return false;
-        if (a != nullptr || b == nullptr)
-            return false;
-
-        const auto searchIt = checked.find(a->val);
-        if (searchIt != checked.end())  // immediately return true, checked means checked & equal
+    bool checkEqual(const Node* a, const Node* b) {
+        if (a == nullptr && b == nullptr)
             return true;
-        
-        if (a->val != b->val)
+        if (a == nullptr && b != nullptr)
             return false;
-        if (a->neighbors.size() != b->neighbors.size())
+        if (a != nullptr && b == nullptr)
             return false;
 
-        checked.insert(a->val);
+        std::unordered_set<int> checked;
+        std::queue<std::pair<const Node*, const Node*>> processingNodes;
+        processingNodes.push(std::make_pair(a, b));
 
-        // optional: might not be necessary, but to make sure
-        std::sort(a->neighbors.begin(), a->neighbors.end());
-        std::sort(b->neighbors.begin(), b->neighbors.end());
+        while (!processingNodes.empty()) {
+            const Node* nodeA;
+            const Node* nodeB;
+            std::tie(nodeA, nodeB) = processingNodes.front();
+            processingNodes.pop();
 
-        const int size = a->neighbors.size();
-        for (int i=0; i<size; ++i) {
-            return checkEqual_(a->neighbors[i], b->neighbors[i], checked);
+            if (checked.count(nodeA->val) > 0)
+                continue;
+
+            if (nodeA->val != nodeB->val)
+                return false;
+            if (nodeA->neighbors.size() != nodeB->neighbors.size())
+                return false;
+            
+            const int size = nodeA->neighbors.size();
+            const std::vector<Node*> nodeA_neighbors = nodeA->neighbors;
+            const std::vector<Node*> nodeB_neighbors = nodeB->neighbors;
+            for (int i=0; i<size; ++i) {
+                if (nodeA_neighbors[i]->val != nodeB_neighbors[i]->val)
+                    return false;
+
+                processingNodes.push(std::make_pair(nodeA_neighbors[i], nodeB_neighbors[i]));
+            }
+
+            checked.insert(nodeA->val);
         }
 
         return true;
