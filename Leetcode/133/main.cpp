@@ -11,8 +11,8 @@
  * TC#1 Adjacency for n-nd node
  * TC#2 ... and so on
  *
- * Time complexity: <to-be-filled>
- * Space complexity: <to-be-filled>
+ * Time complexity: O(N + E)
+ * Space complexity: O(N) from 3 auxiliary data structure to keep track of operations
  */
 #include <vector>
 #include <cassert>
