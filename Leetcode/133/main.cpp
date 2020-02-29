@@ -27,6 +27,8 @@
 #include <set>
 #include <cstring>
 #include <algorithm>
+#include <stack>
+#include <tuple>
 
 // Definition for a Node.
 class Node {
@@ -64,28 +66,6 @@ private:
     void cloneGraph_(Node* node, std::unordered_map<int, Node*>& lookup) {
         if (node == nullptr)
             return;
-
-        Node* currNode;
-        auto currIt = lookup.find(node->val);
-        if (currIt != lookup.end())
-            currNode = currIt->second;
-        else {
-            currNode = new Node(node->val);
-            lookup[node->val] = currNode;
-        }
-
-        for (auto it=node->neighbors.begin(); it!=node->neighbors.end(); ++it) {
-            std::cout << (*it)->val << " ";
-            auto searchIt = lookup.find((*it)->val);
-            if (searchIt != lookup.end()) {
-                currNode->neighbors.push_back(searchIt->second);
-            }
-            else {
-                Node* neighborNode = new Node((*it)->val);
-                lookup.insert(std::make_pair(neighborNode->val, neighborNode));
-                cloneGraph_(*it, lookup);
-            }
-        }
     }
 };
 
@@ -95,6 +75,48 @@ public:
     void traversePrint(const Node* node) {
         std::set<int> visited;
         traversePrint_(node, visited);
+    }
+
+    // optimized to use iterative instead of recursive
+    void traversePrintStack(const Node* node) {
+        if (node == nullptr)
+            return;
+
+        std::unordered_map<int, const Node*> visited;
+        std::stack<std::pair<const Node*, bool>> depthNodes;    // true for parent node, false if not
+        std::queue<const Node*> processingNodes;
+        
+        processingNodes.push(node);
+
+        while (!processingNodes.empty()) {
+            const Node* node = processingNodes.front();
+            processingNodes.pop();
+
+            const auto searchIt = visited.find(node->val);
+            if (searchIt != visited.end())
+                continue;
+            else
+                visited.insert(std::make_pair(node->val, node));
+
+            depthNodes.push(std::make_pair(node, true));
+
+            for (auto it=node->neighbors.begin(); it!=node->neighbors.end(); ++it) {
+                processingNodes.push(*it);
+                depthNodes.push(std::make_pair(*it, false));
+            }
+        }
+
+        while (!depthNodes.empty()) {
+            const Node* node;
+            bool isParentNode;
+            std::tie(node, isParentNode) = depthNodes.top();
+            depthNodes.pop();
+
+            if (isParentNode)
+                std::cout << '(' << node->val << ") ";
+            else
+                std::cout << node->val << " ";
+        }
     }
     std::vector<Node*> traverseGet(const Node* node) {
         std::set<int> visited;
@@ -275,7 +297,6 @@ int main()
 
         Node* outResult = sol.cloneGraph(startNode);
         if (outResult) {
-            TraversalBFS().traversePrint(outResult);
         }
 
         if (!outResult && !startNode) {
