@@ -9,8 +9,8 @@
  * TC#1 Expect boolean result in "true" or "false".
  * TC#2 ... and so on
  *
- * Time complexity: <to-be-filled>
- * Space complexity: <to-be-filled>
+ * Time complexity: O(N)
+ * Space complexity: O(N)
  */
 #include <vector>
 #include <cassert>
