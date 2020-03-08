@@ -5,7 +5,7 @@ OBJS=main.o ArrayInputParser.o
 
 .PHONY: clean
 
-%.o: %.cpp
+%.o: %.cpp ArrayInputParser.h
 	$(CC) -c $(CFLAGS) -o $@ $<
 main.out: $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
