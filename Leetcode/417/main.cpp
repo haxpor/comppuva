@@ -8,8 +8,8 @@
  * TC#1 The expect output
  * TC#2 ... and so on
  *
- * Time complexity: <to-be-filled>
- * Space complexity: <to-be-filled>
+ * Time complexity: O(M*N)
+ * Space complexity: O(M*N)
  */
 #include <vector>
 #include <cassert>
