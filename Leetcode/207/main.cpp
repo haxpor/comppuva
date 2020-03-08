@@ -89,7 +89,7 @@ int main()
 
         // get pre-requisites courses
         std::getline(infile, line);
-        std::vector<std::vector<int>> preRequisites = aparser.parse2(line); // parse 2d-vector
+        std::vector<std::vector<int>> preRequisites = aparser.parse<std::vector<int>>(line); // parse 2d-vector
 
         // get expect result
         bool expect;

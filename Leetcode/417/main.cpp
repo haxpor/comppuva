@@ -88,11 +88,11 @@ int main()
     {
         // read in matrix
         std::getline(infile, line);
-        std::vector<std::vector<int>> matrix = aparser.parse2(line);
+        std::vector<std::vector<int>> matrix = aparser.parse<std::vector<int>>(line);
 
         // read expect result
         std::getline(infile, line);
-        std::vector<std::vector<int>> expect = aparser.parse2(line);
+        std::vector<std::vector<int>> expect = aparser.parse<std::vector<int>>(line);
 
         // compute
         std::vector<std::vector<int>> out = sol.pacificAtlantic(matrix);
