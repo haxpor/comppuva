@@ -35,18 +35,7 @@ int main()
     for (int i=0; i<N; ++i)
     {
         std::getline(infile, line);
-        std::istringstream lineStream(line);
-        std::vector<int> inputs;
-
-        // get list of input numbers
-        int num;
-        while (lineStream >> num)
-        {
-            inputs.push_back(num);
-        }
-
-        // get target
-        infile >> num;
+        std::vector<int> nums = aparser.parse<std::vector<int>>(line);
 
         int expect;
         infile >> expect;
