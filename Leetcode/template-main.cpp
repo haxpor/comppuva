@@ -35,7 +35,7 @@ int main()
     for (int i=0; i<N; ++i)
     {
         std::getline(infile, line);
-        std::vector<int> nums = aparser.parse<std::vector<int>>(line);
+        std::vector<int> nums = aparser.parse<int>(line);
 
         int expect;
         infile >> expect;
