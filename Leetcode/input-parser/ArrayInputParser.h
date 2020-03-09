@@ -30,7 +30,7 @@ std::vector<int> ArrayInputParser::parse<int>(const std::string& str) const {
     for (const char& c : str) {
         if (c == '[')
             st.push(c);
-        else if (c  >= '0' && c <= '9')
+        else if (c == '-' || c == '+' || (c  >= '0' && c <= '9'))
             tmpIntStr += c;
         else if (c == ',') {
             resVector.push_back(std::stoi(tmpIntStr));
@@ -104,7 +104,7 @@ std::vector<std::vector<int>> ArrayInputParser::parse<std::vector<int>>(const st
                 tmpVector.clear();
             st.push(c);
         }
-        else if (c  >= '0' && c <= '9' && leftParenCount >= 2) {
+        else if (c == '-' || c == '+' || (c  >= '0' && c <= '9' && leftParenCount >= 2)) {
             tmpIntStr += c;
         }
         else if (c == ',' && leftParenCount >= 2) {
