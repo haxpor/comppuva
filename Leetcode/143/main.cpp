@@ -8,8 +8,8 @@
  * TC#1 Array of numbers for expected linked list
  * TC#2 ... and so on
  *
- * Time complexity: <to-be-filled>
- * Space complexity: <to-be-filled>
+ * Time complexity: O(N)
+ * Space complexity: O(N)
  */
 #include <vector>
 #include <cassert>
