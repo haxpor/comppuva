@@ -8,8 +8,8 @@
  * TC#1 Expect array of numbers as one sorted list
  * TC#2 ... and so on
  *
- * Time complexity: <to-be-filled>
- * Space complexity: <to-be-filled>
+ * Time complexity: O(K*N)
+ * Space complexity: O(1)
  */
 #include <vector>
 #include <cassert>
