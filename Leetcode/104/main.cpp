@@ -8,8 +8,8 @@
  * TC#1 Expect depth of tree.
  * TC#2 ... and so on
  *
- * Time complexity: <to-be-filled>
- * Space complexity: <to-be-filled>
+ * Time complexity: O(N) (N is number of nodes)
+ * Space complexity: O(1)
  */
 #include <vector>
 #include <cassert>
