@@ -8,8 +8,8 @@
  * TC#1 Array of numbers to form an expect binary tree
  * TC#2 ... and so on
  *
- * Time complexity: <to-be-filled>
- * Space complexity: <to-be-filled>
+ * Time complexity: O(N)
+ * Space complexity: O(h) wheres h is the height of the tree
  */
 #include <vector>
 #include <cassert>
@@ -32,95 +32,14 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
-        std::vector<const TreeNode*> nodes = bfsFlip(root);
-        std::unordered_map<int, TreeNode*> lookup = indexTree(root);
-
-        return constructTree(nodes, lookup);
-    }
-private:
-    std::unordered_map<int, TreeNode*> indexTree(const TreeNode* root) {
-        std::unordered_map<int, TreeNode*> lookup;
-        dfsPostOrder(root, lookup);
-        return lookup;
-    }
-
-    void dfsPostOrder(const TreeNode* root, std::unordered_map<int, TreeNode*>& lookup) {
         if (!root)
-            return;
-
-        dfsPostOrder(root->left, lookup);
-        dfsPostOrder(root->right, lookup);
-        lookup[root->val] = const_cast<TreeNode*>(root);
-    } 
-
-    TreeNode* constructTree(const std::vector<const TreeNode*>& nodes, std::unordered_map<int, TreeNode*>& lookup) {
-        if (nodes.size() == 0)
             return nullptr;
-        
-        TreeNode* res = lookup[nodes[0]->val];
-        std::queue<TreeNode*> queue;
-        queue.push(res);
-        int elemi = 1;
-        while (!queue.empty() && elemi < nodes.size()) {
-            TreeNode* nodeptr = queue.front();
-            queue.pop();
 
-            if (nodes[elemi]) {
-                nodeptr->left = lookup[nodes[elemi++]->val];
-                queue.push(nodeptr->left);
-            }
-            else {
-                nodeptr->left = nullptr;
-                ++elemi;
-            }
-
-            if (elemi >= nodes.size())
-                break;
-
-            if (nodes[elemi]) {
-                nodeptr->right = lookup[nodes[elemi++]->val];
-                queue.push(nodeptr->right);
-            }
-            else {
-                nodeptr->right = nullptr;
-                ++elemi;
-            }
-        }
-
-        return res;
-    }
-
-    std::vector<const TreeNode*> bfsFlip(const TreeNode* root) {
-        if (!root)
-            return {};
-
-        std::vector<const TreeNode*> treeNodes;
-        std::queue<const TreeNode*> queue;
-        treeNodes.push_back(root);
-        queue.push(root);
-
-        while (!queue.empty()) {
-            const TreeNode* node = queue.front();
-            queue.pop();
-
-            if (node->right) {
-                queue.push(node->right);
-                treeNodes.push_back(node->right);
-            }
-            else if (node->left) {
-                treeNodes.push_back(nullptr);
-            }
-
-            if (node->left) {
-                queue.push(node->left);
-                treeNodes.push_back(node->left);
-            }
-            else if (node->right) {
-                treeNodes.push_back(nullptr);
-            }
-        }
-
-        return treeNodes;
+        TreeNode* left = invertTree(root->left);
+        TreeNode* right = invertTree(root->right);
+        root->left = right;
+        root->right = left;
+        return root;
     }
 };
 
