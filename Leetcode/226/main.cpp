@@ -47,24 +47,6 @@ public:
 
 class Util {
 public:
-    // form a binary tree from input of array of numbers
-    // `i` is the indexed-level of node in the binary tree
-    // See https://www.geeksforgeeks.org/construct-complete-binary-tree-given-array/
-    TreeNode* insertLevelOrder(const std::vector<int>& nums, int i) const {
-        if (i >= nums.size())
-            return nullptr;
-
-        if (nums[i] == NULL_NODE)
-            return nullptr;
-
-        TreeNode* node = new TreeNode(nums[i]);
-
-        node->left = insertLevelOrder(nums, 2*i + 1);
-        node->right = insertLevelOrder(nums, 2*i + 2);
-
-        return node;
-    }
-
     TreeNode* constructTree(const std::vector<int>& nums) {
         std::unordered_map<int, TreeNode*> lookup;
         for (const auto& n : nums) {
