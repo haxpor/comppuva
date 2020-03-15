@@ -8,8 +8,8 @@
  * TC#1 Expect output
  * TC#2 ... and so on
  *
- * Time complexity: <to-be-filled>
- * Space complexity: <to-be-filled>
+ * Time complexity: O(N)
+ * Space complexity: O(h) where h is the height of the binary tree
  */
 #include <vector>
 #include <cassert>
