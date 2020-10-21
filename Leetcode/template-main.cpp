@@ -3,10 +3,12 @@
  *
  * Format of testcase.txt is as follows
  *
+ * ---- start of testcases.txt file format ----
  * Number of testcases
  * TC#1 Input numbers separated by white space
  * TC#1 Expect number
  * TC#2 ... and so on
+ * ---- end of testcases.txt file format ----
  *
  * Time complexity: <to-be-filled>
  * Space complexity: <to-be-filled>
