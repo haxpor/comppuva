@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-I. -I../input-parser -ggdb -O2 -std=c++17 -Wall -Wextra -pedantic
 LDFLAGS=-lm
-OBJS=main.o ../input-parser/ArrayInputParser.o
+OBJS=main.o
 
 .PHONY: clean
 
